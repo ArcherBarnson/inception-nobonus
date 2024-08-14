@@ -1,0 +1,14 @@
+services:
+  service_name:
+    container_name: name
+    init: bool (?)
+    networks:
+      -1
+      -2
+    build:
+      context: (= build from where ?)
+      dockerfile: Dockerfile
+    env_file: (= env path)
+    volumes:
+      - jsp faut demander
+    restart: unless-stopped
