@@ -1,18 +1,17 @@
-all:
-	mkdir -p /home/bgrulois/data/wordpress
-	mkdir -p /home/bgrulois/data/mariadb
-	sudo docker compose up --build
+all:	build
+	docker compose -f srcs/docker-compose.yml up
 
-clean:
-	sudo rm -rf /home/bgrulois/data
+build:	
+	[ ! -e /home/bgrulois/data ] && \
+	mkdir -p /home/bgrulois/data/wordpress -m 666 \
+	mkdir -p /home/bgrulois/data/mariadb -m 666 || true;
+	docker compose -f srcs/docker-compose.yml build
 
-fclean:	down clean
-	sudo docker system prune -af --volumes
+clean:	
+	docker compose -f srcs/docker-compose.yml down
 
-up:
-	sudo docker compose up
-
-down:
-	sudo docker compose down
+fclean: clean
+	docker system prune -af
+	rm -rf /home/bgrulois/data
 
 re:	fclean all

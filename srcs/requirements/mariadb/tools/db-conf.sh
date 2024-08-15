@@ -1,15 +1,14 @@
 #!/bin/sh
 
-service mariadb start
+echo "Starting mariadb service..."
 
-#mysqld_safe &
+service mariadb start && echo "Mariadb UP"
 
-#killall mysqld_safe
-sleep 15
+sleep 10
 
 mysqladmin -u root password ${SQL_ROOT_PASSWORD}
 
-mysql -e "CREATE DATABASE IF NOT EXISTS \`${SQL_DATABASE}\`;" && echo "db created\n"
+mysql -e "CREATE DATABASE IF NOT EXISTS \`${SQL_DATABASE}\`;" && echo "Creating DB"
 
 mysql -e "CREATE USER IF NOT EXISTS \`${SQL_USER}\`@'%' IDENTIFIED BY '${SQL_PASSWORD}';" && echo "user created\n"
 
