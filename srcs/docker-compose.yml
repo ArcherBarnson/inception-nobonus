@@ -31,6 +31,7 @@ services:
     volumes:
       - mariadb:/var/lib/mysql
     restart: on-failure
+    stop_grace_period: 30s
 
   wordpress:
     image: wordpress
@@ -48,6 +49,7 @@ services:
     volumes:
       - wordpress:/var/www/wordpress
     restart: on-failure
+    stop_grace_period: 30s
 
 volumes: 
   wordpress:

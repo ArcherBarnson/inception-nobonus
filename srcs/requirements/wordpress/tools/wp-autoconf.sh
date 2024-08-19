@@ -1,10 +1,10 @@
 #!/bin/sh
 
-sleep 15
+sleep 20
 
 if [ -e /var/www/wordpress/wp-config-sample.php ]; then
 
-echo "wp-config.php not found : building now..."
+echo "/!\\ wp-config.php not found : building now... /!\\"
 
 sed -i "s/database_name_here/$SQL_DATABASE/g" /var/www/wordpress/wp-config-sample.php
 sed -i "s/username_here/$SQL_USER/g" /var/www/wordpress/wp-config-sample.php
@@ -21,7 +21,7 @@ wp user create --allow-root $WP_USER1 $WP_USER1_EMAIL --role=author --user_pass=
 
 
 echo "Installation over !"
-sleep 3
+sleep 5
 
 fi
 
@@ -31,8 +31,6 @@ fi
 
 echo "Launching php-fpm7.4..."
 
-if [ -e /etc/php/7.4/fpm/pool.d/www.conf ]; then
-echo "www.conf EXISTS"
-fi
-
 /usr/sbin/php-fpm7.4 -F
+
+echo "Wordpress UP"

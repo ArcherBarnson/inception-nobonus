@@ -2,9 +2,8 @@ all:	build
 	docker compose -f srcs/docker-compose.yml up
 
 build:	
-	[ ! -e /home/bgrulois/data ] && \
-	mkdir -p /home/bgrulois/data/wordpress -m 666 \
-	mkdir -p /home/bgrulois/data/mariadb -m 666 || true;
+	mkdir -p /home/bgrulois/data/mariadb
+	mkdir -p /home/bgrulois/data/wordpress
 	docker compose -f srcs/docker-compose.yml build
 
 clean:	
@@ -12,6 +11,6 @@ clean:
 
 fclean: clean
 	docker system prune -af
-	rm -rf /home/bgrulois/data
+	@sudo rm -rf /home/bgrulois/data
 
 re:	fclean all
