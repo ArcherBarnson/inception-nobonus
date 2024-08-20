@@ -1,5 +1,5 @@
 all:	build
-	docker compose -f srcs/docker-compose.yml up
+	docker compose -f srcs/docker-compose.yml up -d
 
 build:	
 	mkdir -p /home/bgrulois/data/mariadb
@@ -7,9 +7,13 @@ build:
 	docker compose -f srcs/docker-compose.yml build
 
 clean:	
-	docker compose -f srcs/docker-compose.yml down
+	docker compose -f srcs/docker-compose.yml down -v
+
+stop:
+	docker compose -f srcs/docker-compose.yml stop
 
 fclean: clean
+	docker compose -f srcs/docker-compose.yml down --volumes
 	docker system prune -af
 	@sudo rm -rf /home/bgrulois/data
 

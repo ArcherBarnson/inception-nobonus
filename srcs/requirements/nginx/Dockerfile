@@ -1,7 +1,5 @@
 FROM		debian:bullseye
 
-#FROM		debian:buster
-
 RUN		apt update -y && apt upgrade -y
 
 RUN		apt install curl nginx openssl -y
